@@ -1,5 +1,7 @@
 # rayjslib
 
+[![Release](https://github.com/cemalgnlts/rayjslib/actions/workflows/main.yml/badge.svg)](https://github.com/cemalgnlts/rayjslib/actions/workflows/main.yml)
+
 Customized setup to run Raylib in the browser.
 
 Inspiration: [konsumer/raylib-wasm](https://github.com/konsumer/raylib-wasm)
