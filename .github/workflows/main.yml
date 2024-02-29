@@ -39,13 +39,13 @@ jobs:
       #     tag_name: latest
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Release to GitHub
-        uses: ncipollo/release-action@v1
-        with:
-          name: Latest Release
-          tag: latest
-          commit: main
-          body: ${{ github.event.head_commit.message }}
-          artifacts: "build/rayjslib.js,build/rayjslib.d.ts"
-          prerelease: false
-          draft: false
+      # - name: Release to GitHub
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     name: Latest Release
+      #     tag: latest
+      #     commit: main
+      #     body: ${{ github.event.head_commit.message }}
+      #     artifacts: "build/rayjslib.js,build/rayjslib.d.ts"
+      #     prerelease: false
+      #     draft: false
