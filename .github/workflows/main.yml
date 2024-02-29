@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Build and release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+        with:
+          path: raylibjs
+
+      - name: Checkout emscripten-core/emsdk
+        uses: actions/checkout@v4.1.1
+        with:
+          repository: emscripten-core/emsdk
+          path: emsdk
+      
+      - name: Build
+        run: |
+          cd emsdk
+          ./emsdk install latest
+          ./emsdk activate latest
+          source ./emsdk_env.sh
+          cd ../raylibjs
+          npm install
+          npm run build
+
+      - name: Delete tag and release
+        uses: dev-drprasad/delete-tag-and-release@v1.0.1
+        with:
+          delete_release: true
+          tag_name: latest
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release to GitHub
+        uses: ncipollo/release-action@v1
+        with:
+          name: Latest Release
+          tag: latest
+          commit: main
+          body: ${{ github.event.head_commit.message }}
+          artifacts: "build/rayjslib.js,build/rayjslib.d.ts"
+          prerelease: true

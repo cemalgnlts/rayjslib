@@ -1,0 +1,11 @@
+node_modules/
+emsdk/
+
+src/raylib/
+src/raygui/
+src/reasings/
+
+tools/api/
+
+build/
+dist/

@@ -1,0 +1,53 @@
+[
+  "_malloc",
+  "_InitWindow",
+  "_SetWindowTitle",
+  "_GetScreenWidth",
+  "_GetScreenWidth",
+  "_SetClipboardText",
+  "_GetClipboardText",
+  "_ShowCursor",
+  "_HideCursor",
+  "_IsCursorHidden",
+  "_EnableCursor",
+  "_DisableCursor",
+  "_IsCursorOnScreen",
+
+  "_ClearBackground",
+  "_BeginDrawing",
+  "_EndDrawing",
+  
+  "_SetTargetFPS",
+  "_GetFrameTime",
+  "_GetTime",
+  "_GetFPS",
+
+  "_SetRandomSeed",
+  "_GetRandomValue",
+
+  "_IsKeyPressed",
+  "_IsKeyDown",
+  "_IsKeyReleased",
+  "_IsKeyUp",
+  "_GetKeyPressed",
+  "_GetCharPressed",
+
+  "_IsMouseButtonPressed",
+  "_IsMouseButtonDown",
+  "_IsMouseButtonReleased",
+  "_IsMouseButtonUp",
+  "_GetMousePosition",
+
+  "_GetTouchPosition",
+
+
+  "_DrawLine",
+  "_DrawCircle",
+  "_DrawEllipse",
+  "_DrawRing",
+  "_DrawRectangle",
+
+
+  "_DrawText",
+  "_DrawFPS"
+]

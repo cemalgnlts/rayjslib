@@ -1,0 +1,17 @@
+{
+  "name": "raylib-js",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Raylib for web",
+  "scripts": {
+    "preview": "python3 -m http.server --directory test",
+    "build": "./build.sh && node tools/buildTypeFiles.js",
+    "postbuild": "node tools/postBuild.js && node bundle.js"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "esbuild": "^0.20.1"
+  }
+}
