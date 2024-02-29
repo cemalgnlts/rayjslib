@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
         with:
-          path: raylibjs
+          path: rayjslib
 
       - name: Checkout emscripten-core/emsdk
         uses: actions/checkout@v4.1.1
@@ -28,7 +28,7 @@ jobs:
           ./emsdk install latest
           ./emsdk activate latest
           source ./emsdk_env.sh
-          cd ../raylibjs
+          cd ../rayjslib
           npm install
           npm run build
 
