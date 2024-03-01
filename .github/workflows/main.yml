@@ -9,6 +9,8 @@ jobs:
   release:
     name: Build and release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
@@ -46,6 +48,5 @@ jobs:
           tag: latest
           commit: main
           body: ${{ github.event.head_commit.message }}
-          artifacts: "build/rayjslib.js,build/rayjslib.d.ts"
-          prerelease: false
-          draft: false
+          artifacts: "rayjslib/build/rayjslib*"
+          prerelease: true

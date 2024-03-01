@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      body {
-        margin: 0;
-        background-color: #222;
-        color: #aaa;
-      }
-    </style>
-  </head>
 
-  <body>
-    <canvas id="canvas"></canvas>
-    <script type="module">
-      import { setupRaylib, makePointer, Color } from "../build/rayjslib.js";
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #222;
+      color: #aaa;
+    }
+  </style>
+</head>
 
-      const module = await setupRaylib({
-        canvas: document.getElementById("canvas")
-      });
+<body>
+  <canvas id="canvas"></canvas>
+  <script type="module">
+    import { setupRaylib, Color } from "../build/rayjslib.js";
 
-      globalThis.rl = module;
+    const module = await setupRaylib({
+      canvas: document.getElementById("canvas")
+    });
 
-      rl.InitWindow(500, 500);
+    globalThis.rl = module;
 
-      const text = module.allocateUTF8("Hello World");
+    rl.InitWindow(500, 500);
 
-      const update = () => {
-        rl.BeginDrawing();
-        rl.ClearBackground(rl.RAYWHITE);
+    const text = module.stringToUTF8OnStack("Hello World");
 
-        rl.DrawText(text, 100, 200, 50, rl.DARKGRAY);
+    const update = () => {
+      rl.BeginDrawing();
+      rl.ClearBackground(Color.RAYWHITE);
 
-        rl.DrawFPS(5, 5);
-        rl.EndDrawing();
+      rl.DrawText(text, 100, 200, 50, Color.BLACK);
 
-        requestAnimationFrame(update);
-      };
+      rl.DrawFPS(5, 5);
+      rl.EndDrawing();
 
       requestAnimationFrame(update);
+    };
 
-      console.info("Ready!");
-    </script>
-  </body>
+    requestAnimationFrame(update);
+
+    console.info("Ready!");
+  </script>
+</body>
+
 </html>
