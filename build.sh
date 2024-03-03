@@ -89,13 +89,14 @@ if [ ! -d "src/raylib/build" ]; then
 	cd ../..
 fi
 
-emcc src/raylib.c src/raylib/build/raylib/libraylib.a -o build/raylib.js -I src/raylib/src/ --no-entry -DPLATFORM_WEB -O3 \
+emcc src/raylib.c src/raylib/build/raylib/libraylib.a -o build/raylib.js -I src/raylib/src/ --no-entry \
+	-DPLATFORM_WEB -O3 \
 	-sEXPORT_KEEPALIVE=1 \
 	-sMODULARIZE=1 \
 	-sEXPORT_ES6=1 \
 	-sMALLOC=emmalloc \
 	-sUSE_ES6_IMPORT_META=0 \
 	-sUSE_GLFW=3 \
-	-sEXPORTED_RUNTIME_METHODS=stackAlloc,writeArrayToMemory,stringToUTF8OnStack,FS \
+	-sEXPORTED_RUNTIME_METHODS=stackSave,stackAlloc,stackRestore,writeArrayToMemory,stringToUTF8OnStack,FS \
 	-sENVIRONMENT=web \
 	-sEXPORTED_FUNCTIONS=@tools/exportedFunctions.json

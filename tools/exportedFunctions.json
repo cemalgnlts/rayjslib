@@ -1,5 +1,4 @@
 [
-  "_malloc",
   "_InitWindow",
   "_SetWindowTitle",
   "_GetScreenWidth",
@@ -24,6 +23,9 @@
 
   "_SetRandomSeed",
   "_GetRandomValue",
+
+  "_TakeScreenshot",
+  "_SetConfigFlags",
 
   "_IsKeyPressed",
   "_IsKeyDown",

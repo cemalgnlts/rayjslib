@@ -17,7 +17,7 @@
 <body>
   <canvas id="canvas"></canvas>
   <script type="module">
-    import { setupRaylib, Color } from "../build/rayjslib.js";
+    import { setupRaylib  } from "../build/rayjslib.js";
 
     const module = await setupRaylib({
       canvas: document.getElementById("canvas")
@@ -27,13 +27,26 @@
 
     rl.InitWindow(500, 500);
 
+    const sp1 = module.stackSave();
+
     const text = module.stringToUTF8OnStack("Hello World");
+
+    const sp2 = module.stackSave();
+    
+    const WHITE = module.stackAlloc(4);
+    const BLACK = module.stackAlloc(4);
+
+    setTimeout(() => module.stackRestore(sp2), 5000)
+    setTimeout(() => module.stackRestore(sp1), 8000)
+
+    module.writeArrayToMemory([200, 200, 200, 255], WHITE);
+    module.writeArrayToMemory([80, 80, 80, 255], BLACK);
 
     const update = () => {
       rl.BeginDrawing();
-      rl.ClearBackground(Color.RAYWHITE);
+      rl.ClearBackground(WHITE);
 
-      rl.DrawText(text, 100, 200, 50, Color.BLACK);
+      rl.DrawText(text, 100, 200, 50, BLACK);
 
       rl.DrawFPS(5, 5);
       rl.EndDrawing();

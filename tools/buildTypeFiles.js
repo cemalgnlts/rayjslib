@@ -3,9 +3,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 const api = JSON.parse(readFileSync("tools/api/raylib.json"));
 const exportedFuncs = JSON.parse(readFileSync("tools/exportedFunctions.json"));
 
-const KNOWN_TYPES = ["void", "Color", "Vector2"];
-
-exportedFuncs.shift(); // skip _malloc
+// exportedFuncs.shift(); // skip _malloc
 
 const functions = api.functions.filter(fun => exportedFuncs.includes("_" + fun.name));
 
@@ -23,7 +21,7 @@ function buildTypes() {
     const args = params.map(({ name, type }) => name + ": " + typeCheck(type));
 
     const parts = [];
-    parts.push("  // ", description, "\n"); // // description
+    parts.push("  /** ", description, " */\n"); // // description
     parts.push("  ", name, "(",); // name(
     parts.push(args.join(", ")); // p1: string, p2: number
     parts.push("): ", typeCheck(returnType), ";"); // ): void;
@@ -31,25 +29,21 @@ function buildTypes() {
     data.push(parts.join(""));
   }
 
-  const template = `export async function setupRaylib({
+  const template = `export function setupRaylib({
   canvas: HTMLCanvasElement
 }): Promise<RayJSlib>;
 
-export function Color({ r: number = 0, g: number = 0, b: number = 0, a: number = 255 }): number;
-
-interface Color {
-  r: number;
-  g: number;
-  b: number;
-  a: number;
-}
-
-interface Vector2 {
-  x: number;
-  y: number;
-}
+type Pointer = number;
+type Color = Pointer;
+type Vector2 = Pointer;
 
 declare class RayJSlib {
+  stackSave(): Pointer;
+  stackAlloc(size: number): void;
+  stackRestore(pointer: Pointer): void;
+  stringToUTF8OnStack(text: string): Pointer;
+  writeArrayToMemory(array: ArrayBuffer, buffer: Pointer): void;
+
 ${data.join("\n\n")}
 }`;
 
@@ -57,8 +51,6 @@ ${data.join("\n\n")}
 }
 
 function typeCheck(type) {
-  // const type = type_.includes("unsingned ") ? type_.replace("unsigned ", "") : type_;
-
   switch (type) {
     case "const char *":
       return "string";
@@ -69,9 +61,11 @@ function typeCheck(type) {
     case "float":
     case "unsigned int":
       return "number";
+    case "void":
+    case "Color":
+    case "Vector2":
+      return type;
   }
-
-  if (KNOWN_TYPES.includes(type)) return type;
 
   throw Error("Unimplemented type: " + type);
 }

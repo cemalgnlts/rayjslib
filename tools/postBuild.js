@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 const outputFile = readFileSync("build/raylib.js", "utf-8");
 const exportedFuncs = JSON.parse(readFileSync("tools/exportedFunctions.json"));
 
-exportedFuncs.shift(); // Remove _malloc
+// exportedFuncs.shift(); // Remove _malloc
 
 const funcNames = exportedFuncs.join("|");
 
