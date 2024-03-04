@@ -3,7 +3,8 @@ import { readFileSync, writeFileSync } from "node:fs";
 const api = JSON.parse(readFileSync("tools/api/raylib.json"));
 const exportedFuncs = JSON.parse(readFileSync("tools/exportedFunctions.json"));
 
-// exportedFuncs.shift(); // skip _malloc
+exportedFuncs.shift(); // skip _malloc
+exportedFuncs.shift(); // skip _free
 
 const functions = api.functions.filter(fun => exportedFuncs.includes("_" + fun.name));
 
@@ -38,8 +39,10 @@ type Color = Pointer;
 type Vector2 = Pointer;
 
 declare class RayJSlib {
+  _malloc(size: number): Pointer;
+  _free(point: Pointer): void;
   stackSave(): Pointer;
-  stackAlloc(size: number): void;
+  stackAlloc(size: number): Pointer;
   stackRestore(pointer: Pointer): void;
   stringToUTF8OnStack(text: string): Pointer;
   writeArrayToMemory(array: ArrayBuffer, buffer: Pointer): void;
@@ -53,7 +56,7 @@ ${data.join("\n\n")}
 function typeCheck(type) {
   switch (type) {
     case "const char *":
-      return "string";
+      return "Pointer";
     case "bool":
       return "boolean";
     case "int":

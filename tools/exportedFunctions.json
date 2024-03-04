@@ -1,4 +1,7 @@
 [
+  "_malloc",
+  "_free",
+  
   "_InitWindow",
   "_SetWindowTitle",
   "_GetScreenWidth",
@@ -38,16 +41,24 @@
   "_IsMouseButtonDown",
   "_IsMouseButtonReleased",
   "_IsMouseButtonUp",
-  "_GetMousePosition",
+  "_GetMouseX",
+  "_GetMouseY",
 
-  "_GetTouchPosition",
+  "_GetTouchX",
+  "_GetTouchY",
+  "_GetTouchPointCount",
 
 
+  "_DrawPixel",
   "_DrawLine",
   "_DrawCircle",
+  "_DrawCircleLines",
   "_DrawEllipse",
+  "_DrawEllipseLines",
   "_DrawRing",
+  "_DrawRingLines",
   "_DrawRectangle",
+  "_DrawRectangleLines",
 
 
   "_DrawText",
