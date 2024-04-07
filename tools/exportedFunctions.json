@@ -18,6 +18,8 @@
   "_ClearBackground",
   "_BeginDrawing",
   "_EndDrawing",
+  "_BeginMode3D",
+  "_EndMode3D",
   
   "_SetTargetFPS",
   "_GetFrameTime",
@@ -60,6 +62,10 @@
   "_DrawRectangle",
   "_DrawRectangleLines",
 
+  "_DrawCube",
+  "_DrawPlane",
+  "_DrawRay",
+  "_DrawGrid",
 
   "_DrawText",
   "_DrawFPS"
