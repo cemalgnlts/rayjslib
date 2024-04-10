@@ -11,26 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
+    
     steps:
+      - name: "Setup Emscripten toolchain"
+        uses: mymindstorm/setup-emsdk@v14
+      
       - name: Checkout
         uses: actions/checkout@v4.1.1
-        with:
-          path: rayjslib
 
-      - name: Checkout emscripten-core/emsdk
-        uses: actions/checkout@v4.1.1
-        with:
-          repository: emscripten-core/emsdk
-          path: emsdk
-      
       - name: Build
         run: |
-          cd emsdk
-          ./emsdk install latest
-          ./emsdk activate latest
-          source ./emsdk_env.sh
-          cd ../rayjslib
           npm install
           npm run build
 
