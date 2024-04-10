@@ -74,7 +74,6 @@
 
   "_GetMouseRay",
   "_GetRayCollisionBox",
-  "_GetScreenToWorldRay",
 
   "_GetWorldToScreen",
 
