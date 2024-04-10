@@ -38,5 +38,5 @@ jobs:
           tag: latest
           commit: main
           body: ${{ github.event.head_commit.message }}
-          artifacts: "rayjslib/build/rayjslib*"
+          artifacts: "build/rayjslib*"
           prerelease: true
