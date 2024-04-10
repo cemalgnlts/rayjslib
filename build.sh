@@ -83,20 +83,21 @@ if [ ! -d "src/raylib/build" ]; then
 		-DSUPPORT_FILEFORMAT_XM=0 \
 		-DSUPPORT_FILEFORMAT_MOD=0 \
 		-DSUPPORT_FILEFORMAT_QOA=0 \
-		-DSUPPORT_MODULE_RMODELS=0
-	
+		-DSUPPORT_MODULE_RMODELS=1
+
 	cmake --build build
 	cd ../..
 fi
 
-emcc src/raylib.c src/raylib/build/raylib/libraylib.a -o build/raylib.js -I src/raylib/src/ --no-entry \
-	-DPLATFORM_WEB -O3 \
+emcc src/main.c src/raylib/src/rmodels.c src/raylib/build/raylib/libraylib.a -o build/raylib.js -I src/raylib/src/ -O3 --no-entry \
+	-DPLATFORM_WEB \
 	-sEXPORT_KEEPALIVE=1 \
 	-sMODULARIZE=1 \
 	-sEXPORT_ES6=1 \
+	-sEXPORT_NAME=RaylibModule \
 	-sMALLOC=emmalloc \
 	-sUSE_ES6_IMPORT_META=0 \
 	-sUSE_GLFW=3 \
-	-sEXPORTED_RUNTIME_METHODS=stackSave,stackAlloc,stackRestore,writeArrayToMemory,stringToUTF8OnStack,FS \
+	-sEXPORTED_RUNTIME_METHODS=stackSave,stackAlloc,stackRestore,writeArrayToMemory,setValue,getValue,stringToUTF8OnStack,FS \
 	-sENVIRONMENT=web \
 	-sEXPORTED_FUNCTIONS=@tools/exportedFunctions.json

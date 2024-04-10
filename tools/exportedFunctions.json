@@ -43,29 +43,47 @@
   "_IsMouseButtonDown",
   "_IsMouseButtonReleased",
   "_IsMouseButtonUp",
+  "_GetMousePosition",
   "_GetMouseX",
   "_GetMouseY",
+  "_GetMouseDelta",
 
   "_GetTouchX",
   "_GetTouchY",
   "_GetTouchPointCount",
 
 
-  "_DrawPixel",
   "_DrawLine",
   "_DrawCircle",
   "_DrawCircleLines",
-  "_DrawEllipse",
-  "_DrawEllipseLines",
-  "_DrawRing",
-  "_DrawRingLines",
   "_DrawRectangle",
   "_DrawRectangleLines",
 
-  "_DrawCube",
   "_DrawPlane",
+  "_DrawCube",
+  "_DrawCubeWires",
+  "_DrawCapsule",
+  "_DrawCapsuleWires",
+  "_DrawSphere",
+  "_DrawSphereWires",
   "_DrawRay",
   "_DrawGrid",
+  "_DrawLine3D",
+
+  "_DrawBoundingBox",
+
+  "_GetMouseRay",
+  "_GetRayCollisionBox",
+  "_GetScreenToWorldRay",
+
+  "_GetWorldToScreen",
+
+  "_GetRayCollisionQuad",
+  "_GetRayCollisionSphere",
+  "_GetRayCollisionBox",
+
+  "_UpdateCamera",
+  "_UpdateCameraPro",
 
   "_DrawText",
   "_DrawFPS"

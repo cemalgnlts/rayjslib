@@ -22,7 +22,7 @@ function buildTypes() {
     const args = params.map(({ name, type }) => name + ": " + typeCheck(type));
 
     const parts = [];
-    parts.push("  /** ", description, " */\n"); // // description
+    parts.push("  /** ", description, " */\n"); // /* description */
     parts.push("  ", name, "(",); // name(
     parts.push(args.join(", ")); // p1: string, p2: number
     parts.push("): ", typeCheck(returnType), ";"); // ): void;
@@ -37,6 +37,11 @@ function buildTypes() {
 type Pointer = number;
 type Color = Pointer;
 type Vector2 = Pointer;
+type Vector3 = Pointer;
+type Camera3D = Pointer;
+type Ray = Pointer;
+type RayCollision = Pointer;
+type BoundingBox = Pointer;
 
 declare class RayJSlib {
   _malloc(size: number): Pointer;
@@ -44,6 +49,8 @@ declare class RayJSlib {
   stackSave(): Pointer;
   stackAlloc(size: number): Pointer;
   stackRestore(pointer: Pointer): void;
+  setValue(ptr: number, value: number, type: "i8" | "i16" | "i32" | "i64" | "float" | "double" | "*"): void;
+  getValue(ptr: number, type: "i8" | "i16" | "i32" | "i64" | "float" | "double" | "*"): number;
   stringToUTF8OnStack(text: string): Pointer;
   writeArrayToMemory(array: ArrayBuffer, buffer: Pointer): void;
 
@@ -64,9 +71,17 @@ function typeCheck(type) {
     case "float":
     case "unsigned int":
       return "number";
+    case "Camera *":
+    case "Camera":
+      return "Camera3D";
     case "void":
     case "Color":
     case "Vector2":
+    case "Vector3":
+    case "Camera3D":
+    case "Ray":
+    case "RayCollision":
+    case "BoundingBox":
       return type;
   }
 
