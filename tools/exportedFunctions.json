@@ -72,7 +72,7 @@
 
   "_DrawBoundingBox",
 
-  "_GetMouseRay",
+  "_GetScreenToWorldRay",
   "_GetRayCollisionBox",
 
   "_GetWorldToScreen",

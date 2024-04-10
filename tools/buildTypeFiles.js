@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 
 const api = JSON.parse(readFileSync("tools/api/raylib.json"));
 const exportedFuncs = JSON.parse(readFileSync("tools/exportedFunctions.json"));
+const requireAllocTypes = ["Ray", "Vector2", "RayCollision"];
 
 exportedFuncs.shift(); // skip _malloc
 exportedFuncs.shift(); // skip _free
@@ -19,13 +20,20 @@ function buildTypes() {
   const data = [];
 
   for (const { name, description, returnType, params = [] } of functions) {
-    const args = params.map(({ name, type }) => name + ": " + typeCheck(type));
+    const args = params.map(({ name, type }) => name + ": " + typeCorrection(type));
 
     const parts = [];
     parts.push("  /** ", description, " */\n"); // /* description */
     parts.push("  ", name, "(",); // name(
+
     parts.push(args.join(", ")); // p1: string, p2: number
-    parts.push("): ", typeCheck(returnType), ";"); // ): void;
+
+    // Stack should be allocated for such returns.
+    if(requireAllocTypes.includes(returnType)) { // , address: Pointer): void;
+      parts.push((args.length > 0 ? ", " : "") + "address: Pointer): void;");
+    } else {
+      parts.push("): ", typeCorrection(returnType), ";"); // ): void;
+    }
 
     data.push(parts.join(""));
   }
@@ -60,7 +68,7 @@ ${data.join("\n\n")}
   return template;
 }
 
-function typeCheck(type) {
+function typeCorrection(type) {
   switch (type) {
     case "const char *":
       return "Pointer";
