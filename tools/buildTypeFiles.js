@@ -26,14 +26,14 @@ function buildTypes() {
     parts.push("  /** ", description, " */\n"); // /* description */
     parts.push("  ", name, "(",); // name(
 
+    // Stack should be allocated for such returns.
+    if (requireAllocTypes.includes(returnType)) {
+      args.unshift("address: Pointer");
+    }
+
     parts.push(args.join(", ")); // p1: string, p2: number
 
-    // Stack should be allocated for such returns.
-    if(requireAllocTypes.includes(returnType)) { // , address: Pointer): void;
-      parts.push((args.length > 0 ? ", " : "") + "address: Pointer): void;");
-    } else {
-      parts.push("): ", typeCorrection(returnType), ";"); // ): void;
-    }
+    parts.push("): ", typeCorrection(returnType), ";"); // ): void;
 
     data.push(parts.join(""));
   }
@@ -50,6 +50,9 @@ type Camera3D = Pointer;
 type Ray = Pointer;
 type RayCollision = Pointer;
 type BoundingBox = Pointer;
+type Mesh = Pointer;
+type Model = Pointer;
+type Matrix = Pointer;
 
 declare class RayJSlib {
   _malloc(size: number): Pointer;
@@ -90,6 +93,9 @@ function typeCorrection(type) {
     case "Ray":
     case "RayCollision":
     case "BoundingBox":
+    case "Mesh":
+    case "Model":
+    case "Matrix":
       return type;
   }
 

@@ -32,17 +32,14 @@
   "_TakeScreenshot",
   "_SetConfigFlags",
 
+  "_GetKeyPressed",
   "_IsKeyPressed",
   "_IsKeyDown",
   "_IsKeyReleased",
-  "_IsKeyUp",
-  "_GetKeyPressed",
-  "_GetCharPressed",
 
   "_IsMouseButtonPressed",
   "_IsMouseButtonDown",
   "_IsMouseButtonReleased",
-  "_IsMouseButtonUp",
   "_GetMousePosition",
   "_GetMouseX",
   "_GetMouseY",
@@ -70,16 +67,25 @@
   "_DrawGrid",
   "_DrawLine3D",
 
-  "_DrawBoundingBox",
+  "_LoadModelFromMesh",
+  "_UnloadModel",
+  "_GetModelBoundingBox",
+
+  "_GenMeshPlane",
+  "_GenMeshCube",
+  "_GenMeshCylinder",
+  "_GenMeshSphere",
+  "_DrawModel",
+  "_DrawModelEx",
+  "_DrawModelWiresEx",
 
   "_GetScreenToWorldRay",
-  "_GetRayCollisionBox",
-
   "_GetWorldToScreen",
 
   "_GetRayCollisionQuad",
   "_GetRayCollisionSphere",
   "_GetRayCollisionBox",
+  "_GetRayCollisionMesh",
 
   "_UpdateCamera",
   "_UpdateCameraPro",
